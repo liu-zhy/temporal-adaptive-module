@@ -104,9 +104,9 @@ def return_kinetics(modality):
     ROOT_DATASET = '/mnt/lustrenew/share/liuzhaoyang/datasets/'
     filename_categories = 400
     if modality == 'RGB':
-        root_data = ROOT_DATASET + 'k400_zhaoyue/'
-        filename_imglist_train = 'k400_zhaoyue/label/k400_train_list.txt'
-        filename_imglist_val = 'k400_zhaoyue/label/k400_val_list.txt'
+        root_data = ROOT_DATASET + 'k400/'
+        filename_imglist_train = 'k400/label/k400_train_list.txt'
+        filename_imglist_val = 'k400/label/k400_val_list.txt'
         prefix = 'img_{:05d}.png'
     else:
         raise NotImplementedError('no such modality:' + modality)
@@ -118,9 +118,9 @@ def return_kinetics600(modality):
     ROOT_DATASET = '/mnt/lustrenew/share/liuzhaoyang/datasets/'
     filename_categories = 600
     if modality == 'RGB':
-        root_data = ROOT_DATASET + 'k600_zhaoyue_320p/'
-        filename_imglist_train = 'k600_zhaoyue_320p/label/k600_train.txt'
-        filename_imglist_val = 'k600_zhaoyue_320p/label/k600_val.txt'
+        root_data = ROOT_DATASET + 'k600/'
+        filename_imglist_train = 'k600/label/k600_train.txt'
+        filename_imglist_val = 'k600/label/k600_val.txt'
         prefix = 'img_{:05d}.jpg'
     else:
         raise NotImplementedError('no such modality:' + modality)
