@@ -28,11 +28,10 @@ parser.add_argument('--sample',
                     type=str,
                     default="dense-10",
                     help='sample frames within 64 consecutive frames')
-parser.add_argument(
-    '--full_res',
-    default=False,
-    action="store_true",
-    help='use full resolution 256x256 for test as in Non-local I3D')
+parser.add_argument('--full_res',
+                    default=False,
+                    action="store_true",
+                    help='use full resolution 256x256 for test as in Non-local I3D')
 parser.add_argument('--test_crops', type=int, default=1)
 parser.add_argument('--coeff', type=str, default=None)
 parser.add_argument('--batch_size', type=int, default=1)
