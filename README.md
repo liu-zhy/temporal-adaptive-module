@@ -2,21 +2,20 @@
 
 
 ```
-@article{DBLP:journals/corr/abs-2005-06803,
-  author    = {Zhaoyang Liu and
-               Limin Wang and
-               Wayne Wu and
-               Chen Qian and
-               Tong Lu},
-  title     = {{TAM:} Temporal Adaptive Module for Video Recognition},
-  year      = {2020},
-  archivePrefix = {arXiv},
+@inproceedings{liu2021tam,
+  title={TAM: Temporal adaptive module for video recognition},
+  author={Liu, Zhaoyang and Wang, Limin and Wu, Wayne and Qian, Chen and Lu, Tong},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+  pages={13708--13718},
+  year={2021}
 }
 ```
 
+**[NEW!]**  2021/07/23 - Our paper has been accepted by ICCV2021. More pretrained models will be released soon for research purpose. Welcom to follow our work!
 
+**[NEW!]**  2021/06/01 - Our temporal adaptive module has been integrated into [MMAction2](https://github.com/open-mmlab/mmaction2)! We are glad to see our TAM achieved higher accuracy with MMaction2 in several datasets.
 
-**[NEW!]**  We have released the code of TAM for research purpose.
+**[NEW!]**  2020/10/10 - We have released the code of TAM for research purpose.
 
 ## Overview
 
@@ -35,6 +34,7 @@ We release the PyTorch code of the [Temporal Adaptive Module](https://arxiv.org/
       The overall architecture of TANet: ResNet-Block vs. TA-Block.
   	</div>
 </div>
+
 
 
 ## Content
@@ -87,53 +87,53 @@ For convenience, the processing of video data can be summarized as follows:
 
 - Extract frames from videos.
 
-    1. Firstly, you need clone [vidtools](https://github.com/liu-zhy/vidtools.git):
+  1. Firstly, you need clone [vidtools](https://github.com/liu-zhy/vidtools.git):
 
-        ```bash
-        git clone https://github.com/liu-zhy/vidtools.git & cd vidtools
-        ```
+     ```bash
+     git clone https://github.com/liu-zhy/vidtools.git & cd vidtools
+     ```
 
-     2. Extract frames by running:
+   2. Extract frames by running:
 
-        ```
-        python extract_frames.py VIDEOS_PATH/ \
-        -o DATASETS_PATH/frames/ \
-        -j 16 --out_ext png
-        ```
+      ```
+      python extract_frames.py VIDEOS_PATH/ \
+      -o DATASETS_PATH/frames/ \
+      -j 16 --out_ext png
+      ```
 
-        We suggest you use ```--out_ext jpg``` with limited disk storage.
+      We suggest you use ```--out_ext jpg``` with limited disk storage.
 
 - Generate the annotation.
 
-    The annotation usually includes train.txt, val.txt and test.txt (optional). The format of *.txt file is like:
+  The annotation usually includes train.txt, val.txt and test.txt (optional). The format of *.txt file is like:
 
-    ```
-    frames/video_1 num_frames label_1
-    frames/video_2 num_frames label_2
-    frames/video_3 num_frames label_3
-    ...
-    frames/video_N num_frames label_N
-    ```
+  ```
+  frames/video_1 num_frames label_1
+  frames/video_2 num_frames label_2
+  frames/video_3 num_frames label_3
+  ...
+  frames/video_N num_frames label_N
+  ```
 
-    The pre-processed dataset is organized with the following structure:
+  The pre-processed dataset is organized with the following structure:
 
-    ```
-    datasets
-      |_ Kinetics400
-        |_ frames
-        |  |_ [video_0]
-        |  |  |_ img_00001.png
-        |  |  |_ img_00001.png
-        |  |  |_ ...
-        |  |_ [video_1]
-        |     |_ img_00001.png
-        |     |_ img_00002.png
-        |     |_ ...
-        |_ annotations
-           |_ train.txt
-           |_ val.txt
-           |_ test.txt (optional)
-    ```
+  ```
+  datasets
+    |_ Kinetics400
+      |_ frames
+      |  |_ [video_0]
+      |  |  |_ img_00001.png
+      |  |  |_ img_00001.png
+      |  |  |_ ...
+      |  |_ [video_1]
+      |     |_ img_00001.png
+      |     |_ img_00002.png
+      |     |_ ...
+      |_ annotations
+         |_ train.txt
+         |_ val.txt
+         |_ test.txt (optional)
+  ```
 
 - Configure the dataset in [ops/dataset_configs.py](ops/dataset_configs.py).
 
@@ -147,7 +147,7 @@ Here we provide some off-the-shelf [pretrained models](https://drive.google.com/
 | Models  | Datasets     | Resolution | Frames * Crops * Clips | Top-1 | Top-5 |                         Checkpoints                          |
 | :-----: | ------------ | :--------: | :--------------------: | ----- | ----- | :----------------------------------------------------------: |
 | TAM-R50 | Kinetics-400 | 256 * 256  |       8 * 3 * 10       | 76.1% | 92.3% | [ckpt](https://drive.google.com/drive/folders/1sFfmP3yrfc7IzRshEELOby7-aEoymIFL?usp=sharing) |
-| TAM-R50 | Kinetics-400 | 256 * 256  |       16 * 3 * 10       | 76.9% | 92.9% | [ckpt](https://drive.google.com/drive/folders/1nCefjTSPm0Q67e2oSHAhYQgofcim9jOe?usp=sharing) |
+| TAM-R50 | Kinetics-400 | 256 * 256  |      16 * 3 * 10       | 76.9% | 92.9% | [ckpt](https://drive.google.com/drive/folders/1nCefjTSPm0Q67e2oSHAhYQgofcim9jOe?usp=sharing) |
 | TAM-R50 | Sth-Sth v1   | 224 * 224  |       8 * 1 * 1        | 46.5% | 75.8% | [ckpt](https://drive.google.com/drive/folders/1XX5CNDvckaV7d9EH24SXmQsMT7s_a3Zm?usp=sharing) |
 | TAM-R50 | Sth-Sth v1   | 224 * 224  |       16 * 1 * 1       | 47.6% | 77.7% | [ckpt](https://drive.google.com/drive/folders/1wPbID2bVETG91SxpDURI_GeAOn8sqCda?usp=sharing) |
 | TAM-R50 | Sth-Sth v2   | 256 * 256  |       8 * 3 * 2        | 62.7% | 88.0% | [ckpt](https://drive.google.com/drive/folders/1dNxo2F4yiREfq4FdFAaSzPZbtYz8qrq7?usp=sharing) |
@@ -198,15 +198,15 @@ We provided several scripts to train TAM in this repo:
 
 - To train on Kinetics from ImageNet pretrained models, you can run `scripts/train_tam_kinetics_rgb_8f.sh`, which contains:
 
-    ```bash
-      python -u main.py kinetics RGB --arch resnet50 \
-      --num_segments 8 --gd 20 --lr 0.01 --lr_steps 50 75 90 --epochs 100 --batch-size 8 \
-      -j 8 --dropout 0.5 --consensus_type=avg --root_log ./checkpoint/this_ckpt \
-      --root_model ./checkpoint/this_ckpt --eval-freq=1 --npb \
-      --self_conv  --dense_sample --wd 0.0001
-    ```
+  ```bash
+    python -u main.py kinetics RGB --arch resnet50 \
+    --num_segments 8 --gd 20 --lr 0.01 --lr_steps 50 75 90 --epochs 100 --batch-size 8 \
+    -j 8 --dropout 0.5 --consensus_type=avg --root_log ./checkpoint/this_ckpt \
+    --root_model ./checkpoint/this_ckpt --eval-freq=1 --npb \
+    --self_conv  --dense_sample --wd 0.0001
+  ```
 
-    After training, you should get a new checkpoint as downloaded above. 
+  After training, you should get a new checkpoint as downloaded above. 
 
 
 - To train on Something-Something dataset (V1 & V2), you can run following commands:
@@ -219,4 +219,3 @@ We provided several scripts to train TAM in this repo:
     # train TAM on Something-Something V2
     bash scripts/train_tam_somethingv2_rgb_8f.sh
     ```
-
