@@ -263,15 +263,21 @@ class TSNDataSet(data.Dataset):
                 record) if self.random_shift else self._get_val_indices(record)
         else:
             segment_indices = self._get_test_indices(record)
-        return self.get(record, segment_indices)
+        # return self.get(record, segment_indices)
+        return self.get_frames(record,segment_indices)
 
-    def get_frames(self,path,index):
-        cap = cv2.VideoCapture(path)
-        cap.set(cv2.CAP_PROP_POS_FRAMES, index-1)
-        flag, frame = cap.read()
-        frame = frame[:,:,::-1] # BGR2RGB
-
-        return [Image.fromarray(frame).convert('RGB')]
+    def get_frames(self,record,indices):
+        images = list()
+        cap = cv2.VideoCapture(record.path)
+        for seg_ind in indices:
+            p = int(seg_ind)
+            cap.set(cv2.CAP_PROP_POS_FRAMES, p-1)
+            flag, frame = cap.read()
+            frame = frame[:,:,::-1] # BGR2RGB
+            images.extend([Image.fromarray(frame).convert('RGB')])
+        cap.release()
+        process_data, label = self.transform((images, record.label))
+        return process_data, label
 
 
     def get(self, record, indices):
@@ -280,8 +286,7 @@ class TSNDataSet(data.Dataset):
         for seg_ind in indices:
             p = int(seg_ind)
             for i in range(self.new_length):
-                # seg_imgs = self._load_image(record.path, p)
-                seg_imgs = self.get_frames(record.path,p)
+                seg_imgs = self._load_image(record.path, p)
                 images.extend(seg_imgs)
                 if p < record.num_frames:
                     p += 1
